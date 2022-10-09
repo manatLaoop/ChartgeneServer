@@ -8,8 +8,8 @@ app.use(express.json())
 app.use(morgan('combined'))
 
 async function connectServer() {
-     await require('./db/Database')
-     
+     await require('./db/db') 
+     app.use(require('./routers/user_route'))
      
 }
 
