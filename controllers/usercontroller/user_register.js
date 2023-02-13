@@ -25,27 +25,34 @@ module.exports = (req, res) => {
             status: +req.body.status,
             imageProfile: req.file ? req.file.filename : ''
          };
-
-        console.log(req.body);
-         const addUser = await user.create(data);
+        
+       console.log(data);
+      
+         const addUser = await (await user.create(data));
          if (addUser) {
             let JWT = await jwt(addUser._id, addUser.nameLastname);
             res.set('token', JWT,)
-            return res.status(201).send({ message: "ยินดีต้อนรับเข้าสู่ระบบ" })
+        
+            return res.status(201).send([{
+               nameLastname:addUser.nameLastname , 
+                email: addUser.email ,
+                imageprofile:addUser.imageProfile ,
+               id:addUser.id ,         
+            }])
 
          } else {
             return res.status(400).json({ message: "username นี้มีผู้ใช้แล้ว555" })
 
          }
       } catch (err) {
-         return res.status(200).send(err.message);
+         return res.status(500).send(err.message);
       }
       // res.set('Content-Type', 'text/plain')
    })
 }
 async function endcodePassword(password) {
    const salt = 8;
-   const endcode = await bcrypt.hash(process.env.PasswordBcrypt, salt);
+   const endcode = await bcrypt.hash(  password, salt);
    return endcode
 }
 

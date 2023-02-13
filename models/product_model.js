@@ -1,23 +1,16 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema({
-      user_id: { type: mongoose.Schema.Types.ObjectId, required: true },
-      P_id: { type: mongoose.Schema.Types.ObjectId, required: true },
-      Pname: { type: String, require: true, trim: true },
-      Ptype:{type:String},
-      Pdtail: {
-            type: [
-                  {
-                        Pdigest: { type: String, required: true },
-                        Pprice: { type: Number, required: true }
-                  },
-            ], trim: true
-      },
-      Pcolor: { type: String, required: true }
+      addminid:{  type: mongoose.Schema.Types.ObjectId ,required:true , trim:true },
+      productid:{  type: mongoose.Schema.Types.ObjectId ,required:true , trim:true },
+      pseparatetype:{type:String , required:true},
+      pcolor:String,
+      priceDtail:{type:Array , required:true}
+
 }, {
-      timestamps: false // and `updated_at` to store the last updated date
+      timestamps: true // and `updated_at` to store the last updated date
 })
-module.exports = mongoose.model('Product', Schema)
+module.exports = mongoose.model('Products', Schema)
 
 
 

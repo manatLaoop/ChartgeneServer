@@ -8,6 +8,7 @@ const Schema = mongoose.Schema({
   amphures: { type: Number, required: true },
   tambons: { type: Number, required: true },
   imageProfile: { type: String },
+  follow:{type:Array}, 
    status: { type: Number, enum: [1, 2, 3], default: 1 }
 }, { timestamps: true }
 

@@ -22,7 +22,8 @@ app.use(express.json())
 async function connectServer() {
      await require('./db/db') 
 
-
+      
+     app.use(require('./routers/token_router'))
      app.use(require('./routers/all_route'))
      app.use(require('./routers/user_route'))
      app.use(require('./routers/product_route'))
